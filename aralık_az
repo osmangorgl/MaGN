@@ -1,0 +1,29 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dosyayı yükle
+data = pd.read_excel('/content/1.xlsx')
+
+# Ölçüm verilerini çiz
+plt.scatter(data.index, data['Sağ'], label='Sağ', color='blue')
+plt.scatter(data.index, data['SOL'], label='Sol', color='red')
+
+# Üst sınır, alt sınır ve nominal değer çizgilerini ekle
+plt.axhline(67, label='Üst Sınır', color='green', linestyle='--')
+plt.axhline(47, label='Alt Sınır', color='orange', linestyle='--')
+plt.axhline(57, label='Nominal', color='purple')
+
+# Y eksenindeki özel değerleri göster
+current_yticks = list(plt.yticks()[0])
+additional_yticks = [47, 57, 67]
+plt.yticks(sorted(set(current_yticks + additional_yticks)))
+
+
+
+# Etiketler ve başlık ekle
+plt.xlabel('Ölçüm İndeksi')
+plt.ylabel('Ölçüm Değeri (mm)')
+plt.title('1. Fikstür Ölçüm Değerleri')
+plt.legend()
+plt.grid(True)
+plt.show()
